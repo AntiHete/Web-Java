@@ -2,19 +2,30 @@ package com.WebJava.cats.api.domain.product;
 
 import com.WebJava.cats.api.domain.Wearer;
 import com.WebJava.cats.api.domain.category.Category;
+
 import java.math.BigDecimal;
+
 import lombok.Builder;
+<<<<<<< HEAD
 import lombok.NonNull;
 import lombok.Value;
 
 /**
  * Represents a product available for purchase in the system.
+=======
+
+import lombok.Value;
+
+/**
+ * Represents a product with details such as ID, name, description, price, stock quantity, and category.
+>>>>>>> Lab3
  */
 @Value
 @Builder(toBuilder = true)
 public class Product {
 
     /**
+<<<<<<< HEAD
      * The unique identifier of the product.
      */
     @NonNull
@@ -48,6 +59,35 @@ public class Product {
      * The category to which the product belongs.
      */
     @NonNull
+=======
+     * Unique identifier for the product.
+     */
+    Long id;
+
+    /**
+     * Name of the product.
+     */
+    String name;
+
+    /**
+     * Detailed description of the product.
+     */
+    String description;
+
+    /**
+     * Price of the product.
+     */
+    BigDecimal price;
+
+    /**
+     * Available quantity of the product in stock.
+     */
+    Integer stockQuantity;
+
+    /**
+     * Category to which the product belongs.
+     */
+>>>>>>> Lab3
     Category category;
 
     /**

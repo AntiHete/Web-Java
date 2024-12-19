@@ -1,0 +1,16 @@
+databaseChangeLog:
+  # Including initial product table schema changes
+  - include:
+      file: liquibase/db.changelog-init-products.yaml
+
+  # Including initial order-related tables schema changes
+  - include:
+      file: liquibase/db.changelog-init-order-tables.yaml
+
+  # Including modifications to the order table schema
+  - include:
+      file: liquibase/db.changelog-modify-order-table.yaml
+
+  # Including initial insertions into the category table
+  - include:
+      file: liquibase/db.changelog-insert-category-table.yaml
