@@ -8,13 +8,16 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
+
 @Aspect
 @Component
 @RequiredArgsConstructor
 @Slf4j
+
 public class FeatureToggleAspect {
 
     private final FeatureToggleService featureToggleService;
+
 
     private static final String FEATURE_DISABLED_MSG = "Feature for '%s' is disabled";
 
@@ -25,6 +28,7 @@ public class FeatureToggleAspect {
             String errorMessage = String.format(FEATURE_DISABLED_MSG, wearer.name());
             log.warn(errorMessage);
             throw new FeatureIsDisabledException(errorMessage);
+
         }
     }
 }
