@@ -2,6 +2,7 @@ package com.WebJava.cats.api.service;
 
 import com.WebJava.cats.api.domain.Wearer;
 import com.WebJava.cats.api.domain.product.Product;
+
 import java.util.List;
 
 public interface ProductService {

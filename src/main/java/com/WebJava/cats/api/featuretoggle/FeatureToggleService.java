@@ -1,6 +1,7 @@
 package com.WebJava.cats.api.featuretoggle;
 
 import com.WebJava.cats.api.config.FeatureToggleProperties;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,11 @@ public class FeatureToggleService {
     private static final boolean DEFAULT_TOGGLE_STATE = false;
     private final ConcurrentHashMap<String, Boolean> featureToggles;
 
+
     public FeatureToggleService(FeatureToggleProperties featureToggleProperties) {
         this.featureToggles = new ConcurrentHashMap<>(featureToggleProperties.getToggles());
     }
+
 
     public boolean check(String featureName) {
         if (featureName == null) {
@@ -44,5 +47,6 @@ public class FeatureToggleService {
             }
             return state;
         });
+
     }
 }

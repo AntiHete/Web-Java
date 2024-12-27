@@ -3,6 +3,7 @@ package com.WebJava.cats.api.data;
 import com.WebJava.cats.api.domain.Wearer;
 import com.WebJava.cats.api.domain.category.Category;
 import com.WebJava.cats.api.domain.product.Product;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +12,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+/**
+ * A mock implementation of the ProductRepository interface.
+ * This class serves as an in-memory repository for managing {@link Product} entities.
+ */
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductRepositoryImpl.class);
 
+
+    // In-memory list of products acting as a data store
     private final List<Product> products = new ArrayList<>(buildAllProductsMock());
 
+    /**
+     * Finds a product by its unique ID.
+     *
+     * @param id The ID of the product to find.
+     * @return An {@link Optional} containing the product if found, otherwise empty.
+     */
     @Override
     public Optional<Product> findById(Long id) {
         logger.info("Searching for product with ID: {}", id);
@@ -26,20 +39,41 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .findFirst();
     }
 
+    /**
+     * Retrieves all products in the repository.
+     *
+     * @return A list of all available products.
+     */
     @Override
     public List<Product> findAll() {
         logger.info("Retrieving all products. Total count: {}", products.size());
-        return new ArrayList<>(products); // Возвращаем копию списка для безопасности
+
+        return new ArrayList<>(products); // Return a copy to avoid external modifications
+
     }
 
+    /**
+     * Updates a product by ID with the new product details.
+     *
+     * @param id            The ID of the product to update.
+     * @param updatedProduct The new product details.
+     * @return An {@link Optional} containing the updated product.
+     */
     @Override
     public Optional<Product> update(Long id, Product updatedProduct) {
         logger.info("Updating product with ID: {}", id);
-        deleteById(id); // Удаляем существующий продукт
-        products.add(updatedProduct); // Добавляем новый продукт
+
+        deleteById(id); // Remove the existing product
+        products.add(updatedProduct); // Add the updated product
+
         return Optional.of(updatedProduct);
     }
 
+    /**
+     * Deletes a product by its unique ID.
+     *
+     * @param id The ID of the product to delete.
+     */
     @Override
     public void deleteById(Long id) {
         logger.info("Deleting product with ID: {}", id);
@@ -52,6 +86,12 @@ public class ProductRepositoryImpl implements ProductRepository {
         logger.info("Product with ID: {} successfully deleted.", id);
     }
 
+    /**
+     * Saves a new product to the repository.
+     *
+     * @param product The product to save.
+     * @return An {@link Optional} containing the saved product.
+     */
     @Override
     public Optional<Product> save(Product product) {
         logger.info("Adding new product: {}", product.getName());
@@ -59,13 +99,20 @@ public class ProductRepositoryImpl implements ProductRepository {
         return Optional.of(product);
     }
 
+
     @Override
     public void clear() {
         logger.info("Resetting the product repository to default state.");
+
         products.clear();
         products.addAll(buildAllProductsMock());
     }
 
+    /**
+     * Builds mock data for the repository.
+     *
+     * @return A list of mock {@link Product} objects.
+     */
     private List<Product> buildAllProductsMock() {
         logger.info("Building initial mock data for products.");
         return List.of(

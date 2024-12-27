@@ -14,9 +14,11 @@ public class FeatureToggleExtension implements BeforeEachCallback, AfterEachCall
   public void beforeEach(ExtensionContext context) {
     context.getTestMethod().ifPresent(method -> {
       FeatureToggleService featureToggleService = getFeatureToggleService(context);
+
       if (method.isAnnotationPresent(EnableFeatureToggle.class)) {
         EnableFeatureToggle enableFeatureToggle = method.getAnnotation(EnableFeatureToggle.class);
         featureToggleService.enable(enableFeatureToggle.value().getWearerName());
+
       } else if (method.isAnnotationPresent(DisableFeatureToggle.class)) {
         DisableFeatureToggle disableFeatureToggle = method.getAnnotation(DisableFeatureToggle.class);
         featureToggleService.disable(disableFeatureToggle.value().getWearerName());
@@ -32,7 +34,7 @@ public class FeatureToggleExtension implements BeforeEachCallback, AfterEachCall
   public void afterEach(ExtensionContext context) {
     context.getTestMethod().ifPresent(method -> {
       String featureName = null;
-
+      
       if (method.isAnnotationPresent(EnableFeatureToggle.class)) {
         EnableFeatureToggle enabledFeatureToggleAnnotation = method.getAnnotation(EnableFeatureToggle.class);
         featureName = enabledFeatureToggleAnnotation.value().getWearerName();
@@ -40,8 +42,11 @@ public class FeatureToggleExtension implements BeforeEachCallback, AfterEachCall
         DisableFeatureToggle disabledFeatureToggleAnnotation = method.getAnnotation(DisableFeatureToggle.class);
         featureName = disabledFeatureToggleAnnotation.value().getWearerName();
       }
+
+      
       if (featureName != null) {
         FeatureToggleService featureToggleService = getFeatureToggleService(context);
+
         if (getFeatureNamePropertyAsBoolean(context, featureName)) {
           featureToggleService.enable(featureName);
         } else {

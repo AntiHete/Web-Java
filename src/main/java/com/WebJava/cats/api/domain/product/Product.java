@@ -2,19 +2,19 @@ package com.WebJava.cats.api.domain.product;
 
 import com.WebJava.cats.api.domain.Wearer;
 import com.WebJava.cats.api.domain.category.Category;
+
 import java.math.BigDecimal;
+
 import lombok.Builder;
-import lombok.NonNull;
+
+
 import lombok.Value;
 
-/**
- * Represents a product available for purchase in the system.
- */
 @Value
 @Builder(toBuilder = true)
 public class Product {
 
-    /**
+
      * The unique identifier of the product.
      */
     @NonNull
@@ -48,6 +48,7 @@ public class Product {
      * The category to which the product belongs.
      */
     @NonNull
+
     Category category;
 
     /**
