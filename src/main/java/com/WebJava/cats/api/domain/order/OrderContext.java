@@ -10,10 +10,15 @@ import lombok.NonNull;
 import lombok.Singular;
 import lombok.Value;
 
+
 @Value
 @Builder(toBuilder = true)
 public class OrderContext {
 
+
+    /**
+     * The identifier of the associated shopping cart.
+     */
     @NonNull
     String cartId;
 
@@ -29,6 +34,43 @@ public class OrderContext {
      */
     @NonNull
     BigDecimal totalPrice;
+
+    /**
+     * Returns an unmodifiable view of the order entries list.
+     *
+     * @return the list of order entries.
+     */
+    public List<OrderEntry> getEntries() {
+        return Collections.unmodifiableList(entries);
+    }
+
+    
+    /**
+     * Unique identifier for the cart.
+     */
+    UUID cartId;
+
+@Value
+@Builder(toBuilder = true)
+public class OrderContext {
+
+    @NonNull
+    String cartId;
+
+
+    /**
+     * The list of order entries (items) in the cart.
+     */
+    @NonNull
+    @Singular
+    List<OrderEntry> entries;
+
+    /**
+     * The total price of all items in the cart.
+     */
+    @NonNull
+    BigDecimal totalPrice;
+
 
     /**
      * Returns an unmodifiable view of the order entries list.

@@ -2,7 +2,10 @@ package com.WebJava.cats.api.service;
 
 import com.WebJava.cats.api.domain.Wearer;
 import com.WebJava.cats.api.domain.product.Product;
+<<<<<<< HEAD
+=======
 
+>>>>>>> Lab3
 import java.util.List;
 
 public interface ProductService {

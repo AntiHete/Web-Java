@@ -1,6 +1,5 @@
 package com.WebJava.cats.api.web;
 
-
 import static com.WebJava.cats.api.domain.Wearer.CATS;
 import static com.WebJava.cats.api.domain.Wearer.KITTIES;
 import static com.WebJava.cats.api.service.exception.DuplicateProductNameException.PRODUCT_WITH_NAME_EXIST_MESSAGE;
