@@ -1,8 +1,6 @@
 spring:
   application:
     name: Web-Java
-server:
-  port: 9090
 
 application:
   rest-client:
