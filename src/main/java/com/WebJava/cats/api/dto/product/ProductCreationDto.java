@@ -1,6 +1,5 @@
 package com.WebJava.cats.api.dto.product;
 
-
 import com.WebJava.cats.api.dto.validation.CosmicWordCheck;
 import com.WebJava.cats.api.dto.validation.ExtendedValidation;
 import jakarta.validation.GroupSequence;
@@ -14,23 +13,47 @@ import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Value;
 
+/**
+ * DTO representing the data required to create a new product.
+ */
 @Value
 @Builder(toBuilder = true)
 @GroupSequence({ProductCreationDto.class, ExtendedValidation.class})
 public class ProductCreationDto {
-  @NotNull(message = "Name cannot be null")
-  @Size(min = 3, max = 100, message = "Name must be between 3 and 100 characters")
-  @CosmicWordCheck(groups = ExtendedValidation.class)
-  String name;
-  @Size(max = 255, message = "Description cannot exceed 255 characters")
-  @NotNull(message = "description cannot be null")
-  @NotBlank(message = "description cannot be blank")
-  String description;
-  @NotNull(message = "Price cannot be null")
-  @DecimalMin(value = "0.0", inclusive = false)
-  @Digits(integer = 5, fraction = 2)
-  BigDecimal price;
-  @NotNull(message = "Stock quantity cannot be null")
-  @Positive(message = "Stock quantity must be greater than 0")
-  Integer stockQuantity;
+
+    /**
+     * The name of the product.
+     * Must be between 3 and 100 characters long and not null.
+     * It should be a valid cosmic word.
+     */
+    @NotNull(message = "Name cannot be null")
+    @Size(min = 3, max = 100, message = "Name must be between 3 and 100 characters")
+    @CosmicWordCheck(groups = ExtendedValidation.class)
+    String name;
+
+    /**
+     * The description of the product.
+     * Cannot exceed 255 characters, cannot be null or blank.
+     */
+    @NotNull(message = "Description cannot be null")
+    @NotBlank(message = "Description cannot be blank")
+    @Size(max = 255, message = "Description cannot exceed 255 characters")
+    String description;
+
+    /**
+     * The price of the product.
+     * Cannot be null, must be greater than 0, and follow the format with two decimal places.
+     */
+    @NotNull(message = "Price cannot be null")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
+    @Digits(integer = 5, fraction = 2, message = "Price must have at most 2 decimal places")
+    BigDecimal price;
+
+    /**
+     * The stock quantity of the product.
+     * Must be greater than 0 and cannot be null.
+     */
+    @NotNull(message = "Stock quantity cannot be null")
+    @Positive(message = "Stock quantity must be greater than 0")
+    Integer stockQuantity;
 }
