@@ -21,16 +21,8 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductRepositoryImpl.class);
 
-
-    // In-memory list of products acting as a data store
     private final List<Product> products = new ArrayList<>(buildAllProductsMock());
 
-    /**
-     * Finds a product by its unique ID.
-     *
-     * @param id The ID of the product to find.
-     * @return An {@link Optional} containing the product if found, otherwise empty.
-     */
     @Override
     public Optional<Product> findById(Long id) {
         logger.info("Searching for product with ID: {}", id);
@@ -50,15 +42,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 
         return new ArrayList<>(products); // Return a copy to avoid external modifications
 
-    }
-
-    /**
-     * Updates a product by ID with the new product details.
-     *
-     * @param id            The ID of the product to update.
-     * @param updatedProduct The new product details.
-     * @return An {@link Optional} containing the updated product.
-     */
     @Override
     public Optional<Product> update(Long id, Product updatedProduct) {
         logger.info("Updating product with ID: {}", id);
@@ -69,11 +52,6 @@ public class ProductRepositoryImpl implements ProductRepository {
         return Optional.of(updatedProduct);
     }
 
-    /**
-     * Deletes a product by its unique ID.
-     *
-     * @param id The ID of the product to delete.
-     */
     @Override
     public void deleteById(Long id) {
         logger.info("Deleting product with ID: {}", id);
@@ -86,19 +64,13 @@ public class ProductRepositoryImpl implements ProductRepository {
         logger.info("Product with ID: {} successfully deleted.", id);
     }
 
-    /**
-     * Saves a new product to the repository.
-     *
-     * @param product The product to save.
-     * @return An {@link Optional} containing the saved product.
-     */
+
     @Override
     public Optional<Product> save(Product product) {
         logger.info("Adding new product: {}", product.getName());
         products.add(product);
         return Optional.of(product);
     }
-
 
     @Override
     public void clear() {
@@ -108,11 +80,6 @@ public class ProductRepositoryImpl implements ProductRepository {
         products.addAll(buildAllProductsMock());
     }
 
-    /**
-     * Builds mock data for the repository.
-     *
-     * @return A list of mock {@link Product} objects.
-     */
     private List<Product> buildAllProductsMock() {
         logger.info("Building initial mock data for products.");
         return List.of(

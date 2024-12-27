@@ -7,16 +7,13 @@ import java.math.BigDecimal;
 
 import lombok.Builder;
 
-
+import lombok.NonNull;
 import lombok.Value;
 
 @Value
 @Builder(toBuilder = true)
 public class Product {
 
-
-     * The unique identifier of the product.
-     */
     @NonNull
     Long id;
 
@@ -48,6 +45,7 @@ public class Product {
      * The category to which the product belongs.
      */
     @NonNull
+
 
     Category category;
 

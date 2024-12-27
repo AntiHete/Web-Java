@@ -15,6 +15,7 @@ public class FeatureToggleExtension implements BeforeEachCallback, AfterEachCall
     context.getTestMethod().ifPresent(method -> {
       FeatureToggleService featureToggleService = getFeatureToggleService(context);
 
+
       if (method.isAnnotationPresent(EnableFeatureToggle.class)) {
         EnableFeatureToggle enableFeatureToggle = method.getAnnotation(EnableFeatureToggle.class);
         featureToggleService.enable(enableFeatureToggle.value().getWearerName());
@@ -34,7 +35,7 @@ public class FeatureToggleExtension implements BeforeEachCallback, AfterEachCall
   public void afterEach(ExtensionContext context) {
     context.getTestMethod().ifPresent(method -> {
       String featureName = null;
-      
+
       if (method.isAnnotationPresent(EnableFeatureToggle.class)) {
         EnableFeatureToggle enabledFeatureToggleAnnotation = method.getAnnotation(EnableFeatureToggle.class);
         featureName = enabledFeatureToggleAnnotation.value().getWearerName();
@@ -43,7 +44,6 @@ public class FeatureToggleExtension implements BeforeEachCallback, AfterEachCall
         featureName = disabledFeatureToggleAnnotation.value().getWearerName();
       }
 
-      
       if (featureName != null) {
         FeatureToggleService featureToggleService = getFeatureToggleService(context);
 
@@ -55,6 +55,7 @@ public class FeatureToggleExtension implements BeforeEachCallback, AfterEachCall
       }
     });
   }
+
 
   private boolean getFeatureNamePropertyAsBoolean(ExtensionContext context, String featureName) {
     Environment environment = SpringExtension.getApplicationContext(context).getEnvironment();

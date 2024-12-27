@@ -10,6 +10,21 @@ import com.WebJava.cats.api.service.exception.ProductNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.security.access.prepost.PreAuthorize;
+
+@Service
+public class ProductServiceImpl implements ProductService {
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ProductDto createProduct(ProductCreationDto productCreationDto) {
+    }
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ProductDto getProductById(Long id) {
+    }
+}
 
 @Service
 @RequiredArgsConstructor

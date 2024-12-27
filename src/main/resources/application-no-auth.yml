@@ -1,0 +1,10 @@
+spring:
+  profiles: no-auth
+
+security:
+  basic:
+    enabled: false
+
+spring:
+  security:
+    enabled: false
